@@ -27,7 +27,7 @@ test: $(BIN_DIR)/$(BIN_TEST)
 
 $(BIN_DIR)/$(BIN_TEST): $(OBJS) $(TESTS) 
 	$(MKDIR) $(@D)
-	$(CC) $(TESTS) $< -o $@ $(LIBS_TEST)
+	$(CC) $^ -o $@ $(LIBS_TEST)
 
 -include $(DEPS)
 
