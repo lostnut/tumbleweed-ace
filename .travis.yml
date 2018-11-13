@@ -1,6 +1,11 @@
 # Language
 language: c
 
+# Compilers
+compiler:
+        - clang
+        - gcc
+
 ###########################Build cycle#########################################
 # install apt addons (optional)
 # install cache components (optional)
