@@ -1,0 +1,33 @@
+# Language
+language: c
+
+###########################Build cycle#########################################
+# install apt addons (optional)
+# install cache components (optional)
+# before_install
+# install
+# before_script
+# script
+# before_cache (optional)
+# after_success or after_failure
+# before_deply (optional)
+# deploy (optional)
+# after_deploy (optional)
+# after_script
+#
+#
+# For C project default build cycle is : 
+# install : N/A
+# script : ./configure && make && make test
+#
+
+before_install:
+- sudo add-apt-repository ppa:snaipewastaken/ppa -y # assume yes
+- sudo apt-get update -q # quiet update
+- sudo apt-get install criterion-dev -y # assume yes
+
+install:
+- make test
+
+script:
+- ./build/bin/test
