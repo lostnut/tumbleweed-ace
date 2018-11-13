@@ -10,7 +10,7 @@ void setup(void)
         if((f = fopen("test/resources/1-H-1g.jeff33.ACE", "r")) == NULL){
                 printf("could not open resource file\n");
         }
-        ace = new_ace(f);
+        ace = NewAce(f);
 }
 
 void teardown(void) 
@@ -18,7 +18,7 @@ void teardown(void)
         fclose(f);
 }
 
-TestSuite(ace, .init = setup, .fini = teardown)
+TestSuite(ace, .init = setup, .fini = teardown);
 
 Test(ace, hz)
 {
@@ -37,5 +37,5 @@ Test(ace, tz)
 
 Test(ace, hd)
 {
-        cr_assert_str_eq(ace.hd, "02/23/2018");
+        cr_assert_str_eq(ace.hd, "02/23/18");
 }
