@@ -39,3 +39,13 @@ Test(ace, hd)
 {
         cr_assert_str_eq(ace.hd, "02/23/18");
 }
+
+Test(ace, hk)
+{
+        cr_assert_str_eq(ace.hk, "MAT=125 ACE file produced at NEA with NDEC                            ");
+}
+
+Test(ace, hm)
+{
+        cr_assert_str_eq(ace.hm, "   mat 125");
+}

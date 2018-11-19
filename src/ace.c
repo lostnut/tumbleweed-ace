@@ -3,13 +3,17 @@
 struct Ace NewAce(FILE *f)
 {
         struct Ace ace;
-        if(fscanf(f, "%s", ace.hz) != 1)
-                Die("NewAce", "Could not parse HZ field");
-        if(fscanf(f, "%lf", &ace.aw) != 1)
-                Die("NewAce", "Could not parse AW field");
-        if(fscanf(f, "%lf", &ace.tz) != 1)
-                Die("NewAce", "Could not parse TZ field");
-        if(fscanf(f, "%s", ace.hd) != 1)
-                Die("NewAce", "Could not parse HD field");
+        char dummy[MAX_STR];
+        /* Read first line */
+        if (fgets(dummy, sizeof dummy, f) == NULL)
+                Die("NewAce", "Could not read first line");
+        if (sscanf(dummy, "%11s %lf %lf %11s",
+                                ace.hz, &ace.aw, &ace.tz, ace.hd) != 4)
+                Die("NewAce", "Could not parse first line");
+        /* Read second line */
+        if(fgets(ace.hk, 71, f) == NULL)
+                Die("NewAce", "Could not parse HK field");
+        if(fgets(ace.hm, 11, f) == NULL)
+                Die("NewAce", "Could not parse HM field");
         return ace;
 }
