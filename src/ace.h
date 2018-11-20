@@ -12,6 +12,7 @@ struct Ace {
         char hm[11];
         int iz[16];
         double awr[16];
+        int nxs[16];
 };
 
 struct Ace NewAce(FILE *f);

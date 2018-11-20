@@ -24,5 +24,9 @@ struct Ace NewAce(FILE *f)
                         Die("NewAce", "Could not parse AW[%d]", i);
                 }
         }
+        /* Read nxs array */
+        for(int i = 0; i < 16; i++)
+                if(fscanf(f, "%d", &ace.nxs[i]) != 1)
+                        Die("NewAce", "Could not parse NXS[%d]", i);
         return ace;
 }

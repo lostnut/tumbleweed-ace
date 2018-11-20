@@ -63,3 +63,10 @@ Test(ace, awr)
         for(int i = 0; i < 16; i++)
                 cr_assert_eq(ace.awr[i], tmp[i]);
 }
+
+Test(ace, nxs)
+{
+        int tmp[16] = {5574, 1001, 307, 3, 0, 1, 1};
+        for(int i = 0; i < 16; i++)
+                cr_assert_eq(ace.nxs[i], tmp[i]);
+}
