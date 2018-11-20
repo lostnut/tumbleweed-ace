@@ -49,3 +49,17 @@ Test(ace, hm)
 {
         cr_assert_str_eq(ace.hm, "   mat 125");
 }
+
+Test(ace, iz)
+{
+        int tmp[16] = {0};
+        for(int i = 0; i < 16; i++)
+                cr_assert_eq(ace.iz[i], tmp[i]);
+}
+
+Test(ace, awr)
+{
+        double tmp[16] = {0};
+        for(int i = 0; i < 16; i++)
+                cr_assert_eq(ace.awr[i], tmp[i]);
+}
