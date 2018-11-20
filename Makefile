@@ -1,6 +1,6 @@
 CC ?= gcc
-CFLAGS = -O3 -MMD -std=c11
-CFLAGS_TEST = -MMD -std=c11
+CFLAGS = -O3 -MMD -std=c99
+CFLAGS_TEST = -MMD -std=c99
 LIBS = 
 LIBS_TEST = -lcriterion
 
@@ -27,7 +27,7 @@ test: $(BIN_DIR)/$(BIN_TEST)
 
 $(BIN_DIR)/$(BIN_TEST): $(OBJS) $(TESTS) 
 	$(MKDIR) $(@D)
-	$(CC) $^ -o $@ $(LIBS_TEST)
+	$(CC) $(CFLAGS_TEST) $^ -o $@ $(LIBS_TEST)
 
 -include $(DEPS)
 
