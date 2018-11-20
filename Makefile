@@ -1,6 +1,6 @@
 CC ?= gcc
-CFLAGS = -O3 -MMD
-CFLAGS_TEST = -MMD
+CFLAGS = -O3 -MMD -std=c11
+CFLAGS_TEST = -MMD -std=c11
 LIBS = 
 LIBS_TEST = -lcriterion
 
