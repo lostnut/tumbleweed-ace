@@ -1,4 +1,4 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void Die(char *function, char *message);
+void Die(const char *function, const char *format, ...);
