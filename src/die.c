@@ -1,6 +1,6 @@
 #include "die.h"
 
-void Die(const char *function, const char *format, ...)
+void die(const char *function, const char *format, ...)
 {
         printf("Error in function %s:\n", function);
         va_list argp;

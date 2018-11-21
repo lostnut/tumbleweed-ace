@@ -9,7 +9,7 @@ void setup(void)
         if ((f = fopen("test/resources/1-H-1g.jeff33.ACE", "r")) == NULL) {
                 printf("could not open resource file\n");
         }
-        ace = NewAce(f);
+        ace = new_ace(f);
 }
 
 void teardown(void)

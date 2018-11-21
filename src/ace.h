@@ -16,4 +16,4 @@ struct Ace {
         int jxs[32];
 };
 
-struct Ace NewAce(FILE *f);
+struct Ace new_ace(FILE *f);
