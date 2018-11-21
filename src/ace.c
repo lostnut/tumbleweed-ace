@@ -7,30 +7,30 @@ struct Ace NewAce(FILE *f)
         /* Read first line */
         if (fgets(dummy, sizeof dummy, f) == NULL)
                 Die("NewAce", "Could not read first line");
-        if (sscanf(dummy, "%11s %lf %lf %11s",
-                                ace.hz, &ace.aw, &ace.tz, ace.hd) != 4)
+        if (sscanf(dummy, "%11s %lf %lf %11s", ace.hz, &ace.aw, &ace.tz,
+                   ace.hd) != 4)
                 Die("NewAce", "Could not parse first line");
         /* Read second line */
-        if(fgets(ace.hk, 71, f) == NULL)
+        if (fgets(ace.hk, 71, f) == NULL)
                 Die("NewAce", "Could not parse HK field");
-        if(fgets(ace.hm, 11, f) == NULL)
+        if (fgets(ace.hm, 11, f) == NULL)
                 Die("NewAce", "Could not parse HM field");
         /* Read IZ/AW array */
-        for(int i = 0; i < 16; i++){
-                if(fscanf(f, "%d", &ace.iz[i]) != 1){
+        for (int i = 0; i < 16; i++) {
+                if (fscanf(f, "%d", &ace.iz[i]) != 1) {
                         Die("NewAce", "Could not parse IZ[%d]", i);
-                }               
-                if(fscanf(f, "%lf", &ace.awr[i]) != 1){
+                }
+                if (fscanf(f, "%lf", &ace.awr[i]) != 1) {
                         Die("NewAce", "Could not parse AW[%d]", i);
                 }
         }
         /* Read nxs array */
-        for(int i = 0; i < 16; i++)
-                if(fscanf(f, "%d", &ace.nxs[i]) != 1)
+        for (int i = 0; i < 16; i++)
+                if (fscanf(f, "%d", &ace.nxs[i]) != 1)
                         Die("NewAce", "Could not parse NXS[%d]", i);
         /* Read jxs array*/
-        for(int i = 0; i < 32; i++)
-                if(fscanf(f, "%d", &ace.jxs[i]) != 1)
+        for (int i = 0; i < 32; i++)
+                if (fscanf(f, "%d", &ace.jxs[i]) != 1)
                         Die("NewAce", "Could not parse NXS[%d]", i);
         return ace;
 }
