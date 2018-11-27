@@ -3,6 +3,14 @@
 
 #define MAX_STR 256
 
+struct Esz {
+        double *egrid;
+        double *xstot;
+        double *xsa;
+        double *xsel;
+        double *have;
+};
+
 struct Ace {
         char hz[11];
         double aw;
@@ -14,6 +22,7 @@ struct Ace {
         double awr[16];
         int nxs[16];
         int jxs[32];
+        struct Esz esz;
 };
 
 struct Ace new_ace(FILE *f);

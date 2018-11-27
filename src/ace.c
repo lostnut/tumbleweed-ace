@@ -32,5 +32,49 @@ struct Ace new_ace(FILE *f)
         for (int i = 0; i < 32; i++)
                 if (fscanf(f, "%d", &ace.jxs[i]) != 1)
                         die("new_ace", "Could not parse NXS[%d]", i);
+        /* Read esz block */
+        struct Esz *esz = &ace.esz;
+        int loc         = ace.jxs[0];
+        int ne          = ace.nxs[2];
+        double dum;
+        /* read to loc */
+        for (int i = 0; i < loc - 1; i++)
+                if (fscanf(f, "%lf", &dum) != 1)
+                        die("new_ace", "Could not parse double");
+        /*energy grid*/
+        if ((esz->egrid = malloc(ne * sizeof esz->egrid)) == NULL)
+                die("new_ace", "Allocation of egrid failed");
+        for (int i = 0; i < ne; i++) {
+                if (fscanf(f, "%lf", &(esz->egrid[i])) != 1)
+                        die("new_ace", "Could not parse ESZ-energies");
+        }
+        /* total cross section */
+        if ((esz->xstot = malloc(ne * sizeof esz->xstot)) == NULL)
+                die("new_ace", "Allocation of xstot failed");
+        for (int i = 0; i < ne; i++) {
+                if (fscanf(f, "%lf", &(esz->xstot[i])) != 1)
+                        die("new_ace", "Could not parse ESZ xstot section");
+        }
+        /* total neutron disappearance cross section */
+        if ((esz->xsa = malloc(ne * sizeof esz->xsa)) == NULL)
+                die("new_ace", "Allocation of xsa failed");
+        for (int i = 0; i < ne; i++) {
+                if (fscanf(f, "%lf", &(esz->xsa[i])) != 1)
+                        die("new_ace", "Could not parse ESZ xsa section");
+        }
+        /* elastic cross section */
+        if ((esz->xsel = malloc(ne * sizeof esz->xsa)) == NULL)
+                die("new_ace", "Allocation of xsel failed");
+        for (int i = 0; i < ne; i++) {
+                if (fscanf(f, "%lf", &(esz->xsel[i])) != 1)
+                        die("new_ace", "Could not parse ESZ xsel section");
+        }
+        /* average heating numbers */
+        if ((esz->have = malloc(ne * sizeof esz->have)) == NULL)
+                die("new_ace", "Allocation of have failed");
+        for (int i = 0; i < ne; i++) {
+                if (fscanf(f, "%lf", &(esz->have[i])) != 1)
+                        die("new_ace", "Could not parse ESZ have section");
+        }
         return ace;
 }
