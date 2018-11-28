@@ -638,3 +638,14 @@ Test(ace, qs)
         cr_assert_arr_eq(ace.lqr.qs, q, 3);
 }
 
+Test(ace, tys)
+{
+        int ty[3] = {0, 0, 0};
+        cr_assert_arr_eq(ace.tyr.tys, ty, 3);
+}
+
+Test(ace, locas)
+{
+        int locs[3] = {1, 310, 619};
+        cr_assert_arr_eq(ace.lsig.locas, locs, 3);
+}

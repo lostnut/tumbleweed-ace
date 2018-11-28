@@ -91,5 +91,19 @@ struct Ace new_ace(FILE *f)
         for (int i = 0; i < nmt; i++)
                 if (fscanf(f, "%lf", &(lqr->qs[i])) != 1)
                         die("new_ace", "Could not parse LQR block");
+        /* read tyr bloack */
+        struct Tyr *tyr = &ace.tyr;
+        if ((tyr->tys = malloc(nmt * sizeof tyr->tys)) == NULL)
+                die("new_ace", "Allocation of tys failed");
+        for (int i = 0; i < nmt; i++)
+                if (fscanf(f, "%d", &(tyr->tys[i])) != 1)
+                        die("new_ace", "Could not parse TYR block");
+        /* read lsig block */
+        struct Lsig *lsig = &ace.lsig;
+        if ((lsig->locas = malloc(nmt * sizeof lsig->locas)) == NULL)
+                die("new_ace", "Allocation of locas failed");
+        for (int i = 0; i < nmt; i++)
+                if (fscanf(f, "%d", &(lsig->locas[i])) != 1)
+                        die("new_ace", "Could not parse LSIG block");
         return ace;
 }

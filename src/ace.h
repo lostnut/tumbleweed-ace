@@ -19,6 +19,14 @@ struct Lqr {
         double *qs;
 };
 
+struct Tyr {
+        int *tys;
+};
+
+struct Lsig {
+        int *locas;
+};
+
 struct Ace {
         char hz[11];
         double aw;
@@ -33,6 +41,8 @@ struct Ace {
         struct Esz esz;
         struct Mtr mtr;
         struct Lqr lqr;
+        struct Tyr tyr;
+        struct Lsig lsig;
 };
 
 struct Ace new_ace(FILE *f);
