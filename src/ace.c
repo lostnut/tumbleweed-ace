@@ -76,5 +76,20 @@ struct Ace new_ace(FILE *f)
                 if (fscanf(f, "%lf", &(esz->have[i])) != 1)
                         die("new_ace", "Could not parse ESZ have section");
         }
+        /* read mtr block */
+        struct Mtr *mtr = &ace.mtr;
+        int nmt         = ace.nxs[3];
+        if ((mtr->mts = malloc(nmt * sizeof mtr->mts)) == NULL)
+                die("new_ace", "Allocation of mts failed");
+        for (int i = 0; i < nmt; i++)
+                if (fscanf(f, "%d", &(mtr->mts[i])) != 1)
+                        die("new_ace", "Could not parse MTR block");
+        /* read lqr block */
+        struct Lqr *lqr = &ace.lqr;
+        if ((lqr->qs = malloc(nmt * sizeof mtr->mts)) == NULL)
+                die("new_ace", "Allocation of qs failed");
+        for (int i = 0; i < nmt; i++)
+                if (fscanf(f, "%lf", &(lqr->qs[i])) != 1)
+                        die("new_ace", "Could not parse LQR block");
         return ace;
 }

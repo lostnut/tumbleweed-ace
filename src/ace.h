@@ -11,6 +11,14 @@ struct Esz {
         double *have;
 };
 
+struct Mtr {
+        int *mts;
+};
+
+struct Lqr {
+        double *qs;
+};
+
 struct Ace {
         char hz[11];
         double aw;
@@ -23,6 +31,8 @@ struct Ace {
         int nxs[16];
         int jxs[32];
         struct Esz esz;
+        struct Mtr mtr;
+        struct Lqr lqr;
 };
 
 struct Ace new_ace(FILE *f);

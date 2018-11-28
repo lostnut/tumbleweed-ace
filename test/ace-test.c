@@ -625,3 +625,16 @@ Test(ace, have)
                 1.01608500000E+01};
         cr_assert_arr_eq(ace.esz.have, heat, 307);
 }
+
+Test(ace, mt)
+{
+        int mt[3] = {102, 204, 444};
+        cr_assert_arr_eq(ace.mtr.mts, mt, 3);
+}
+
+Test(ace, qs)
+{
+        double q[3] = {2.22463100000E+00, 0.00000000000E+00, 0.00000000000E+00};
+        cr_assert_arr_eq(ace.lqr.qs, q, 3);
+}
+
