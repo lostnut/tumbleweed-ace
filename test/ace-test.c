@@ -3,7 +3,7 @@
 #include <criterion/criterion.h>
 
 static FILE *f;
-static struct Ace ace;
+static struct Ace *ace;
 void setup(void)
 {
         if ((f = fopen("test/resources/1-H-1g.jeff33.ACE", "r")) == NULL) {
@@ -21,54 +21,55 @@ TestSuite(ace, .init = setup, .fini = teardown);
 
 Test(ace, hz)
 {
-        cr_assert_str_eq(ace.hz, "1001.03c");
+        cr_assert_str_eq(ace->hz, "1001.03c");
 }
 
 Test(ace, aw)
 {
-        cr_assert_float_eq(ace.aw, 0.999167, 1e-7);
+        cr_assert_float_eq(ace->aw, 0.999167, 1e-7);
 }
 
 Test(ace, tz)
 {
-        cr_assert_float_eq(ace.tz, 2.5301e-8, 1e-13);
+        cr_assert_float_eq(ace->tz, 2.5301e-8, 1e-13);
 }
 
 Test(ace, hd)
 {
-        cr_assert_str_eq(ace.hd, "02/23/18");
+        cr_assert_str_eq(ace->hd, "02/23/18");
 }
 
 Test(ace, hk)
 {
-        cr_assert_str_eq(ace.hk, "MAT=125 ACE file produced at NEA with NDEC   "
-                                 "                         ");
+        cr_assert_str_eq(ace->hk,
+                         "MAT=125 ACE file produced at NEA with NDEC   "
+                         "                         ");
 }
 
 Test(ace, hm)
 {
-        cr_assert_str_eq(ace.hm, "   mat 125");
+        cr_assert_str_eq(ace->hm, "   mat 125");
 }
 
 Test(ace, iz)
 {
         int tmp[16] = {0};
         for (int i = 0; i < 16; i++)
-                cr_assert_eq(ace.iz[i], tmp[i]);
+                cr_assert_eq(ace->iz[i], tmp[i]);
 }
 
 Test(ace, awr)
 {
         double tmp[16] = {0};
         for (int i = 0; i < 16; i++)
-                cr_assert_eq(ace.awr[i], tmp[i]);
+                cr_assert_eq(ace->awr[i], tmp[i]);
 }
 
 Test(ace, nxs)
 {
         int tmp[16] = {5574, 1001, 307, 3, 0, 1, 1};
         for (int i = 0; i < 16; i++)
-                cr_assert_eq(ace.nxs[i], tmp[i]);
+                cr_assert_eq(ace->nxs[i], tmp[i]);
 }
 
 Test(ace, jxs)
@@ -78,7 +79,7 @@ Test(ace, jxs)
                        4208, 4208, 4209, 4892, 0,    4893, 0,    0,
                        0,    0,    0,    0,    0,    4894, 4895, 4896};
         for (int i = 0; i < 32; i++)
-                cr_assert_eq(ace.jxs[i], tmp[i]);
+                cr_assert_eq(ace->jxs[i], tmp[i]);
 }
 
 Test(ace, egrid)
@@ -187,7 +188,7 @@ Test(ace, egrid)
                 1.70000000000E+01, 1.75000000000E+01, 1.80000000000E+01,
                 1.85000000000E+01, 1.90000000000E+01, 1.95000000000E+01,
                 2.00000000000E+01};
-        cr_assert_arr_eq(ace.esz.egrid, egrid, 307);
+        cr_assert_arr_eq(ace->esz.egrid, egrid, 307);
 }
 
 Test(ace, xstot)
@@ -296,7 +297,7 @@ Test(ace, xstot)
                 5.68997726000E-01, 5.52804011000E-01, 5.37412095000E-01,
                 5.22763779000E-01, 5.08805961000E-01, 4.95490443000E-01,
                 4.82773424000E-01};
-        cr_assert_arr_eq(xs, ace.esz.xstot, 307);
+        cr_assert_arr_eq(xs, ace->esz.xstot, 307);
 }
 
 Test(ace, xsa)
@@ -405,7 +406,7 @@ Test(ace, xsa)
                 2.85260300000E-05, 2.83110700000E-05, 2.80952300000E-05,
                 2.78785100000E-05, 2.76609500000E-05, 2.74425900000E-05,
                 2.72235400000E-05};
-        cr_assert_arr_eq(ace.esz.xsa, xs, 307);
+        cr_assert_arr_eq(ace->esz.xsa, xs, 307);
 }
 
 Test(ace, xsel)
@@ -514,7 +515,7 @@ Test(ace, xsel)
                 5.68969200000E-01, 5.52775700000E-01, 5.37384000000E-01,
                 5.22735900000E-01, 5.08778300000E-01, 4.95463000000E-01,
                 4.82746200000E-01};
-        cr_assert_arr_eq(ace.esz.xsel, xs, 307);
+        cr_assert_arr_eq(ace->esz.xsel, xs, 307);
 }
 
 Test(ace, have)
@@ -623,29 +624,29 @@ Test(ace, have)
                 8.63495000000E+00, 8.88966100000E+00, 9.14420800000E+00,
                 9.39859700000E+00, 9.65282700000E+00, 9.90690800000E+00,
                 1.01608500000E+01};
-        cr_assert_arr_eq(ace.esz.have, heat, 307);
+        cr_assert_arr_eq(ace->esz.have, heat, 307);
 }
 
 Test(ace, mt)
 {
         int mt[3] = {102, 204, 444};
-        cr_assert_arr_eq(ace.mtr.mts, mt, 3);
+        cr_assert_arr_eq(ace->mtr.mts, mt, 3);
 }
 
 Test(ace, qs)
 {
         double q[3] = {2.22463100000E+00, 0.00000000000E+00, 0.00000000000E+00};
-        cr_assert_arr_eq(ace.lqr.qs, q, 3);
+        cr_assert_arr_eq(ace->lqr.qs, q, 3);
 }
 
 Test(ace, tys)
 {
         int ty[3] = {0, 0, 0};
-        cr_assert_arr_eq(ace.tyr.tys, ty, 3);
+        cr_assert_arr_eq(ace->tyr.tys, ty, 3);
 }
 
 Test(ace, locas)
 {
         int locs[3] = {1, 310, 619};
-        cr_assert_arr_eq(ace.lsig.locas, locs, 3);
+        cr_assert_arr_eq(ace->lsig.locas, locs, 3);
 }

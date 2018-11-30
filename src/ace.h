@@ -45,4 +45,4 @@ struct Ace {
         struct Lsig lsig;
 };
 
-struct Ace new_ace(FILE *f);
+struct Ace *new_ace(FILE *f);
